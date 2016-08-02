@@ -34,6 +34,7 @@ gem 'slim-rails'
 gem 'doorkeeper'
 gem 'rest-client'
 gem 'json'
+gem 'will_paginate', '~> 3.1.0'
 
 group :test do
   gem 'capybara-screenshot'
