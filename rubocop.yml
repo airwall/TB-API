@@ -1,0 +1,44 @@
+AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  Exclude:
+    - tmp/**/*
+    - bin/*
+    - Capfile
+    - config/boot.rb
+    - config/environment.rb
+    - config/initializers/version.rb
+    - db/schema.rb
+    - Gemfile
+    - Guardfile
+    - Rakefile
+    - spec/support/shared/votable.rb
+
+Rails:
+  Enabled: true
+
+Metrics/LineLength:
+  Exclude:
+    - "config/**/*"
+    - "spec/support/shared/votable.rb"
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/TrivialAccessors:
+  AllowPredicates: true
+
+Style/SpaceBeforeFirstArg:
+  Enabled: false

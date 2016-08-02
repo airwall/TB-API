@@ -33,9 +33,25 @@ gem 'jbuilder', '~> 2.0'
 gem 'slim-rails'
 gem 'doorkeeper'
 
+group :test do
+  gem 'capybara-screenshot'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'poltergeist'
+  gem 'rails-controller-testing'
+  gem 'rubocop', require: false
+  gem 'rubocop-rspec'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
+  gem 'pry-byebug'
+  gem 'rspec', '~> 3.5.0.beta3'
+  gem 'rspec-rails', '~> 3.5.0beta3'
+  gem 'factory_girl_rails'
+  gem 'spring-commands-rspec'
+  gem 'parallel_tests'
 end
 
 group :development do
