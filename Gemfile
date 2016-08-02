@@ -32,6 +32,8 @@ gem 'jbuilder', '~> 2.0'
 # gem 'capistrano-rails', group: :development
 gem 'slim-rails'
 gem 'doorkeeper'
+gem 'rest-client'
+gem 'json'
 
 group :test do
   gem 'capybara-screenshot'
