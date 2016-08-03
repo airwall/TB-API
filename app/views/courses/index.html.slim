@@ -1,1 +1,4 @@
-= @content
+- @courses.each do |course|
+  = course.description
+
+= will_paginate @posts

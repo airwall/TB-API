@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
 
   def index
     Course.fetch
-    @content = Course.all
+    @courses = Course.paginate(:page => params[:page], :per_page => 1)
     render :index
   end
 end

@@ -1,4 +1,7 @@
 class Course < ApplicationRecord
+
+  self.per_page = 1
+  
   def self.fetch
     response = RestClient.post "http://s1.teachbase.ru/oauth/token", grant_type: "client_credentials",
                                                                      client_id: Rails.application.secrets.client_id,
@@ -6,7 +9,7 @@ class Course < ApplicationRecord
 
     token = JSON.parse(response)["access_token"]
     content = JSON.parse(RestClient.get("http://s1.teachbase.ru/endpoint/v1/course_sessions", "Authorization" => "Bearer #{token}"))
-    # self.save_data_to_db(content)
+    self.save_data_to_db(content)
   end
 
   def self.save_data_to_db(content)
