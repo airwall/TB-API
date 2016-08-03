@@ -1,4 +1,8 @@
-- @courses.each do |course|
-  = course.description
+.row
+  .col-md-10
+    - @courses.each do |course|
+      p
+        = course.description
 
-= will_paginate @posts
+    br
+    = will_paginate @posts
