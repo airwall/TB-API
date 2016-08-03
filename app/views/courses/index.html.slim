@@ -1,8 +1,10 @@
 .row
   .col-md-10
+    p
+      = @alert
     - @courses.each do |course|
       p
         = course.description
 
     br
-    = will_paginate @posts
+    = will_paginate @posts if @request == 200

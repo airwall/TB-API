@@ -10,7 +10,7 @@ FactoryGirl.define do
   factory :course do
     session_name "Session name"
     access_type  "open"
-    course_id   104
+    course_id 104
     course_name
     owner_name "Owner name"
     description
