@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803133543) do
+ActiveRecord::Schema.define(version: 20160804145932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "courses", force: :cascade do |t|
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "session_name"
     t.datetime "started_at"
     t.string   "access_type"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20160803133543) do
     t.string   "cower_url"
     t.string   "description"
     t.integer  "course_id"
+    t.datetime "last_synched_at"
+    t.integer  "request_code",    default: 200
   end
 
 end

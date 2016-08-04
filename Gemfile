@@ -34,6 +34,7 @@ gem 'slim-rails'
 gem 'rest-client'
 gem 'json'
 gem 'will_paginate', '~> 3.1.0'
+gem 'sidekiq'
 
 group :test do
   gem 'capybara-screenshot'

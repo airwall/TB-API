@@ -2,9 +2,12 @@
   .col-md-10
     p
       = @alert
-    - @courses.each do |course|
-      p
-        = course.description
+    - if @courses != nil
+      - @courses.each do |course|
+        h3
+          = course.course_name
+        p
+          = course.description
 
-    br
-    = will_paginate @posts if @request == 200
+      br
+      = will_paginate @posts if @request_code == 200

@@ -1,15 +1,17 @@
 class CoursesController < ApplicationController
-  before_action :check_status_load_data
+  before_action :check_status
 
   def index
-    if @request == 200
-      @courses = Course.paginate(page: params[:page], per_page: 1)
-    elsif @request == 404
-      @courses = Course.paginate(page: 1, per_page: 1)
-      @alert = "В данный момент Teachbase недоступен. Загружена копия от #{Course.checkpoint.strftime("%Y-%m-%d %H:%M")}."
+    if @request_code == 200
+      @courses = Course.where(access_type: "open").paginate(page: params[:page], per_page: 1)
+    elsif @request_code == 404
+      @courses = Course.where(access_type: "open").paginate(page: 1, per_page: 1)
+      @alert = "В данный момент Teachbase недоступен. Загружена копия от #{@checkpoint.strftime("%Y-%m-%d %H:%M")}."
+    elsif @request_code == 0
+      @courses = Course.where(access_type: "open").paginate(page: 1, per_page: 1)
+      @alert = "Teachbase лежит уже #{((Time.now - @checkpoint) / 3600).round} часов."
     else
-      @courses = Course.paginate(page: 1, per_page: 1)
-      @alert = "Teachbase лежит уже #{((Time.now - Course.checkpoint) / 3600).round} часов."
+      @alert = "Сервис недоступен. Попытайтесь позже!"
     end
     render :index
   end
@@ -17,9 +19,8 @@ class CoursesController < ApplicationController
 
   private
 
-  def check_status_load_data
-    Course.request_delay
-    Course.save_data_to_db if Course.request == 200
-    @request = Course.request
+  def check_status
+    @request_code = Course.last&.request_code
+    @checkpoint = Course.last&.last_synched_at
   end
 end
