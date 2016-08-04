@@ -31,7 +31,6 @@ gem 'jbuilder', '~> 2.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'slim-rails'
-gem 'doorkeeper'
 gem 'rest-client'
 gem 'json'
 gem 'will_paginate', '~> 3.1.0'
