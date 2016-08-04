@@ -26,7 +26,7 @@ class Course < ApplicationRecord
                    request_code: 200)
           end
       end
-      where(access_type: "rescue").destroy!
+      where(access_type: "rescue").destroy! if exists?(access_type: "rescue")
     rescue
       self.request_token
     end
@@ -38,7 +38,7 @@ class Course < ApplicationRecord
                                                                        client_id: Rails.application.secrets.client_id,
                                                                        client_secret: Rails.application.secrets.client_secret
       @token = JSON.parse(response)["access_token"]
-      self.save_data_to_db 
+      self.save_data_to_db
     rescue
       self.set_time_delay
     end
