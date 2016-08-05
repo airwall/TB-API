@@ -1,6 +1,6 @@
 class Course < ApplicationRecord
 
-  RequestServerStatusJob.set(wait: 1.minutes).perform_later
+  GetDataFromApiJob.set(wait: 1.hours).perform_later
 
   def self.get_content
     begin
@@ -56,7 +56,7 @@ class Course < ApplicationRecord
   def self.set_time_delay
     if count != 0
       delay_server = (Time.now - last&.last_synched_at)
-      request_code = delay_server < 5 ? 404 : 0
+      request_code = delay_server < 4500 ? 404 : 0
       last&.update(request_code: request_code)
     else
       create(request_code: 404, last_synched_at: Time.now, access_type: "rescue")

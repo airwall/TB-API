@@ -1,4 +1,4 @@
-class RequestServerStatusJob < ApplicationJob
+class GetDataFromApiJob < ApplicationJob
   queue_as :default
 
   def perform
