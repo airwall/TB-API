@@ -8,6 +8,5 @@
           = course.course_name
         p
           = course.description
-
       br
-      = will_paginate @posts if @request_code == 200
+    = will_paginate @courses if @request_code == 200

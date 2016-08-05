@@ -30,6 +30,7 @@ FactoryGirl.define do
     started_at "2016-07"
     finished_at "2016-09"
     apply_url "url"
+    last_synched_at Time.now
     request_code 404
   end
 
@@ -43,7 +44,8 @@ FactoryGirl.define do
     started_at "2016-07"
     finished_at "2016-09"
     apply_url "url"
-    request_code 404
+    last_synched_at Time.now
+    request_code 0
   end
 
 end
