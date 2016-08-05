@@ -17,6 +17,5 @@ FactoryGirl.define do
     started_at "2016-07"
     finished_at "2016-09"
     apply_url "url"
-    cower_url "url"
   end
 end
