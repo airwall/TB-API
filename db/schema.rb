@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804145932) do
+ActiveRecord::Schema.define(version: 20160805143935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20160804145932) do
     t.string   "apply_url"
     t.string   "course_name"
     t.string   "owner_name"
-    t.string   "cower_url"
     t.string   "description"
     t.integer  "course_id"
     t.datetime "last_synched_at"

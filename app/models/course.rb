@@ -2,28 +2,37 @@ class Course < ApplicationRecord
 
   RequestServerStatusJob.set(wait: 1.minutes).perform_later
 
+  def self.get_content
+    begin
+      @content = JSON.parse(RestClient.get("http://s1.teachbase.ru/endpoint/v1/course_sessions", "Authorization" => "Bearer #{@token}"))
+    rescue
+      self.request_token
+    end
+  end
+
   def self.save_data_to_db
     begin
-      content = JSON.parse(RestClient.get("http://s1.teachbase.ru/endpoint/v1/course_sessions", "Authorization" => "Bearer #{@token}"))
-      content.each do |c|
+      self.get_content
+      @content.each do |c|
         next unless c["access_type"] == "open"
-          if exists?(course_id: c["course"]["id"])
-            c.touch(:last_synched_at)
-            c.update(request_code: 200)
+          id = (c["course"]["id"]).to_i
+          if self.exists?(course_id: id)
+            self.where(course_id: id).each do |u|
+              u.touch(:last_synched_at)
+              u.update(request_code: 200)
+            end
           else
-            create(session_name: c["name"],
-                   started_at:   c["started_at"],
-                   access_type:  c["access_type"],
-                   finished_at:  c["finished_at"],
-                   apply_url:    c["apply_url"],
-                   course_id:    c["course"]["id"],
-                   course_name:  c["course"]["name"],
-                   owner_name:   c["course"]["owner_name"],
-                   cower_url:    c["course"]["cower_url"],
-                   description:  c["course"]["description"],
-                   session_id:   c["id"],
-                   last_synched_at: Time.now,
-                   request_code: 200)
+          create(session_name: c["name"],
+                 started_at:   c["started_at"],
+                 access_type:  c["access_type"],
+                 finished_at:  c["finished_at"],
+                 apply_url:    c["apply_url"],
+                 course_id:    c["course"]["id"],
+                 course_name:  c["course"]["name"],
+                 owner_name:   c["course"]["owner_name"],
+                 description:  c["course"]["description"],
+                 last_synched_at: Time.now,
+                 request_code: 200)
           end
       end
       where(access_type: "rescue").destroy! if exists?(access_type: "rescue")
