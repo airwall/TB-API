@@ -5,14 +5,14 @@ class Course < ApplicationRecord
   def self.get_content
     begin
       @content = JSON.parse(RestClient.get("http://s1.teachbase.ru/endpoint/v1/course_sessions", "Authorization" => "Bearer #{@token}"))
+      self.save_data_to_db
     rescue
-      self.request_token
+      self.set_time_delay
     end
   end
 
   def self.save_data_to_db
     begin
-      self.get_content
       @content.each do |c|
         next unless c["access_type"] == "open"
           id = (c["course"]["id"]).to_i
@@ -47,7 +47,7 @@ class Course < ApplicationRecord
                                                                        client_id: Rails.application.secrets.client_id,
                                                                        client_secret: Rails.application.secrets.client_secret
       @token = JSON.parse(response)["access_token"]
-      self.save_data_to_db
+      self.get_content
     rescue
       self.set_time_delay
     end
