@@ -8,4 +8,10 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     .container
+      - flash.each do |key, value|
+        div class=("alert alert-#{key}")
+          a.close data-dismiss="alert" href="#"  ×
+          ul
+            li
+              = value
       = yield

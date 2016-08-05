@@ -6,12 +6,12 @@ class CoursesController < ApplicationController
       @courses = Course.where(access_type: "open").paginate(page: params[:page], per_page: 1)
     elsif @request_code == 404
       @courses = Course.where(access_type: "open").paginate(page: 1, per_page: 1)
-      @alert = "В данный момент Teachbase недоступен. Загружена копия от #{@checkpoint.strftime("%Y-%m-%d %H:%M")}."
+      flash[:danger] = "В данный момент Teachbase недоступен. Загружена копия от #{@checkpoint.strftime("%Y-%m-%d %H:%M")}."
     elsif @request_code == 0
       @courses = Course.where(access_type: "open").paginate(page: 1, per_page: 1)
-      @alert = "Teachbase лежит уже #{((Time.now - @checkpoint) / 3600).round} часов."
+      flash[:danger] = "Teachbase лежит уже #{((Time.now - @checkpoint) / 3600).round} часов."
     else
-      @alert = "Сервис недоступен. Попытайтесь позже!"
+      flash[:danger] = "Сервис недоступен. Попытайтесь позже!"
     end
     render :index
   end
