@@ -27,21 +27,21 @@ RSpec.describe Course, type: :model do
     end
   end
 
-  describe ".save_data_to_db" do
-    context "should save course from open session" do
-      it "Save" do
-        json = JSON.parse(File.read("#{Rails.root}/spec/support/shared/course.json"))
-        expect { Course.save_data_to_db(json) }.to change(Course, :count).by(1)
-      end
-    end
-
-    context "update last_synched_at if course exist" do
-      it "Don't save" do
-        json = JSON.parse(File.read("#{Rails.root}/spec/support/shared/course.json"))
-        Course.save_data_to_db(json)
-        expect { Course.save_data_to_db(json) }.to change(Course, :count).by(0)
-        expect { Course.save_data_to_db(json) }.to change{ Course.last.last_synched_at }
-      end
-    end
-  end
+  # describe ".save_data_to_db" do
+  #   context "should save course from open session" do
+  #     it "Save" do
+  #       json = JSON.parse(File.read("#{Rails.root}/spec/support/shared/course.json"))
+  #       expect { Course.save_data_to_db(json) }.to change(Course, :count).by(1)
+  #     end
+  #   end
+  #
+  #   context "update last_synched_at if course exist" do
+  #     it "Don't save" do
+  #       json = JSON.parse(File.read("#{Rails.root}/spec/support/shared/course.json"))
+  #       Course.save_data_to_db(json)
+  #       expect { Course.save_data_to_db(json) }.to change(Course, :count).by(0)
+  #       expect { Course.save_data_to_db(json) }.to change{ Course.last.last_synched_at }
+  #     end
+  #   end
+  # end
 end

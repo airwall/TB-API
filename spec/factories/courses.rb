@@ -47,5 +47,4 @@ FactoryGirl.define do
     last_synched_at Time.now
     request_code 0
   end
-
 end

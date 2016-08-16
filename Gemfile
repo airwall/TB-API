@@ -35,6 +35,7 @@ gem 'rest-client'
 gem 'json'
 gem 'will_paginate', '~> 3.1.0'
 gem 'sidekiq'
+gem 'whenever', :require => false
 
 group :test do
   gem 'capybara-screenshot'

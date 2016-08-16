@@ -54,6 +54,5 @@ RSpec.describe CoursesController, type: :controller do
         expect(flash[:danger]).to be_present
       end
     end
-
   end
 end
